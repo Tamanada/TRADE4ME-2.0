@@ -2,7 +2,7 @@ import './supabase_service.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class LeaderboardService {
-  final SupabaseClient _client = SupabaseService.instance.client;
+  SupabaseClient get _client => SupabaseService.instance.client;
 
   Future<List<Map<String, dynamic>>> getLeaderboard({
     required String category,

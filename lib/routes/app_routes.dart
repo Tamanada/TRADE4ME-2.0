@@ -12,6 +12,7 @@ import '../presentation/profile_settings_screen/profile_settings_screen.dart';
 import '../presentation/referral_management_screen/referral_management_screen.dart';
 import '../presentation/registration_screen/registration_screen.dart';
 import '../presentation/splash_screen/splash_screen.dart';
+import '../presentation/pitch_screen/pitch_screen.dart';
 import '../presentation/user_reports_management_screen/user_reports_management_screen.dart';
 
 class AppRoutes {
@@ -36,9 +37,9 @@ class AppRoutes {
       '/user-reports-management-screen';
 
   static const String leaderboardScreen = '/leaderboard-screen';
+  static const String pitchScreen = '/pitch-screen';
 
   static Map<String, WidgetBuilder> get routes => {
-    initial: (context) => const SplashScreen(),
     profileSettings: (context) => const ProfileSettingsScreen(),
     dashboard: (context) => const DashboardScreen(),
     splash: (context) => const SplashScreen(),
@@ -53,5 +54,6 @@ class AppRoutes {
         const UserReportsManagementScreen(),
     onboardingScreen: (context) => const OnboardingScreen(),
     leaderboardScreen: (context) => const LeaderboardScreen(),
+    pitchScreen: (context) => const PitchScreen(),
   };
 }
