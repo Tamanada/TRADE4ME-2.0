@@ -15,16 +15,26 @@ class SupabaseService {
     defaultValue: '',
   );
 
+  static bool _initialized = false;
+
   // Initialize Supabase - call this in main()
   static Future<void> initialize() async {
+    if (supabaseUrl.isEmpty || supabaseAnonKey.isEmpty) return;
     await Supabase.initialize(url: supabaseUrl, anonKey: supabaseAnonKey);
+    _initialized = true;
   }
 
-  // Get Supabase client
-  SupabaseClient get client => Supabase.instance.client;
+  bool get isInitialized => _initialized;
+
+  // Get Supabase client - throws StateError in demo mode
+  SupabaseClient get client {
+    if (!_initialized) throw StateError('Supabase not initialized (demo mode)');
+    return Supabase.instance.client;
+  }
 
   // Get current user ID
   String? getCurrentUserId() {
+    if (!isInitialized) return null;
     return client.auth.currentUser?.id;
   }
 }

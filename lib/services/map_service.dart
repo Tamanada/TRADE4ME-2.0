@@ -4,7 +4,7 @@ import '../models/user_location_stat_model.dart';
 import './supabase_service.dart';
 
 class MapService {
-  final client = SupabaseService.instance.client;
+  get client => SupabaseService.instance.client;
 
   // Get places within bounding box
   Future<List<MapPlaceModel>> getPlacesInBbox({

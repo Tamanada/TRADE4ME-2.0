@@ -3,7 +3,7 @@ import './supabase_service.dart';
 /// Service for admin-specific operations including place moderation,
 /// category management, and report handling
 class AdminService {
-  static final _supabase = SupabaseService.instance.client;
+  static get _supabase => SupabaseService.instance.client;
 
   // ==================== DASHBOARD STATS ====================
 

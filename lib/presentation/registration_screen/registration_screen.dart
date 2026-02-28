@@ -360,7 +360,7 @@ class _RegistrationScreenState extends State<RegistrationScreen>
         SizedBox(height: 2.h),
         GestureDetector(
           onTap: () {
-            Navigator.pushNamed(context, '/profile-settings-screen');
+            Navigator.pushNamed(context, AppRoutes.pitchScreen);
           },
           child: Text(
             'Join the Peace Movement',
@@ -391,7 +391,7 @@ class _RegistrationScreenState extends State<RegistrationScreen>
       children: [
         GestureDetector(
           onTap: () {
-            Navigator.pushNamed(context, '/profile-settings-screen');
+            Navigator.pushNamed(context, AppRoutes.pitchScreen);
           },
           child: Text(
             'Join the Peace Movement',
