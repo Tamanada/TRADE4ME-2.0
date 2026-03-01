@@ -53,3 +53,13 @@ android/*.jks
 android/*.keystore
 download_gradle.ps1
 .env
+
+# Temp scripts
+install_ndk.ps1
+download_gradle.ps1
+
+# Build artifacts at root
+flutter_service_worker.js
+main.dart.js
+.last_build_id
+.metadata
