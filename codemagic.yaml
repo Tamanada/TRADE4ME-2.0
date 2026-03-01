@@ -1,0 +1,75 @@
+workflows:
+  ios-release:
+    name: iOS Release
+    max_build_duration: 60
+    environment:
+      flutter: stable
+      xcode: latest
+      cocoapods: default
+      vars:
+        BUNDLE_ID: "com.nava_peace.app"
+        APP_STORE_ID: "" # TODO: add after App Store Connect setup
+      groups:
+        - supabase_credentials # Set SUPABASE_URL and SUPABASE_ANON_KEY in Codemagic environment
+    scripts:
+      - name: Install Flutter dependencies
+        script: flutter pub get
+      - name: Build iOS release
+        script: |
+          flutter build ipa --release \
+            --dart-define=SUPABASE_URL=$SUPABASE_URL \
+            --dart-define=SUPABASE_ANON_KEY=$SUPABASE_ANON_KEY
+    artifacts:
+      - build/ios/ipa/*.ipa
+    publishing:
+      app_store_connect:
+        auth: integration
+        submit_to_testflight: true
+
+  android-release:
+    name: Android Release
+    max_build_duration: 60
+    environment:
+      flutter: stable
+      android_signing:
+        - nava_peace_keystore # Upload keystore in Codemagic settings
+      groups:
+        - supabase_credentials
+    scripts:
+      - name: Install Flutter dependencies
+        script: flutter pub get
+      - name: Build Android AAB
+        script: |
+          flutter build appbundle --release \
+            --dart-define=SUPABASE_URL=$SUPABASE_URL \
+            --dart-define=SUPABASE_ANON_KEY=$SUPABASE_ANON_KEY
+    artifacts:
+      - build/app/outputs/bundle/release/*.aab
+    publishing:
+      google_play:
+        credentials: $GCLOUD_SERVICE_ACCOUNT_CREDENTIALS
+        track: internal
+
+  web-release:
+    name: Web Release (Firebase)
+    max_build_duration: 30
+    environment:
+      flutter: stable
+      node: latest
+      groups:
+        - supabase_credentials
+        - firebase_credentials # Set FIREBASE_TOKEN in Codemagic
+    scripts:
+      - name: Install Flutter dependencies
+        script: flutter pub get
+      - name: Build Flutter web
+        script: |
+          flutter build web --release \
+            --dart-define=SUPABASE_URL=$SUPABASE_URL \
+            --dart-define=SUPABASE_ANON_KEY=$SUPABASE_ANON_KEY
+      - name: Deploy to Firebase Hosting
+        script: |
+          npm install -g firebase-tools
+          firebase deploy --only hosting --token $FIREBASE_TOKEN
+    artifacts:
+      - build/web/
