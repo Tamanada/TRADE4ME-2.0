@@ -34,10 +34,10 @@ DEXES = {
         "fee_num":  9990,
         "fee_den":  10000,
     },
-    "apeswap": {
-        "name":     "ApeSwap",
-        "router":   "0xcF0feBd3f17CEf5b47b0cD258aCf6780733b98B6",
-        "factory":  "0x0841BD0B734E4F5853f0dD8d7Eb8496E4597B30B",
+    "babyswap": {
+        "name":     "BabySwap",
+        "router":   "0x325E343f1dE602396E256B67eFd1F61C3A6B38Bd",
+        "factory":  "0x86407bEa2078ea5f5EB5A52B2caA963bC1F889Da",
         "fee":      0.002,    # 0.20%
         "fee_num":  9980,
         "fee_den":  10000,
